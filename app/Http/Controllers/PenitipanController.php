@@ -47,30 +47,32 @@ class PenitipanController extends Controller
             'tanggal_checkout' => 'required',
             'lama_titip' => 'required',
             'layanan' => 'required',
-            'antar_jemput' => 'required',
+            'antar_jemput',
             'id_kucing' => 'required',
-            'id_user' => 'required'
+            'id_user' => 'required',
+            'status' => 'required'
         ]);
-        
+
         $penitipan = new Penitipan;
-        $penitipan->tanggal_titip=Str::title($request->tanggal_titip);
-        $penitipan->tanggal_checkout=Str::title($request->tanggal_checkout);
-        $penitipan->lama_titip=Str::title($request->lama_titip);
-        $penitipan->layanan=Str::title($request->layanan);
-        $penitipan->antar_jemput=Str::title($request->antar_jemput);
-        $penitipan->id_kucing=$request->id_kucing;
-        $penitipan->id_user=$request->id_user;
+        $penitipan->tanggal_titip = Str::title($request->tanggal_titip);
+        $penitipan->tanggal_checkout = Str::title($request->tanggal_checkout);
+        $penitipan->lama_titip = Str::title($request->lama_titip);
+        $penitipan->layanan = Str::title($request->layanan);
+        $penitipan->antar_jemput = Str::title($request->antar_jemput);
+        $penitipan->id_kucing = $request->id_kucing;
+        $penitipan->id_user = $request->id_user;
+        $penitipan->status = Str::title($request->status);
         $penitipan->save();
 
         // Penitipan::create([
-            
+
         //     'tanggal_titip' => Str::title($request->tanggal_titip),
         //     'tanggal_checkout' => Str::title($request->tanggal_checkout),
         //     'lama_titip' => Str::title($request->lama_titip),
         //     'layanan' => Str::title($request->layanan),
         //     'antar_jemput' => Str::title($request->antar_jemput),
         //     'id_kucing' => $request->kucing
-            
+
         // ]);
 
         $request->session()->flash('sukses', '
@@ -78,7 +80,7 @@ class PenitipanController extends Controller
                 Data berhasil ditambahkan
             </div>
         ');
-        
+
         return redirect('/penitipan');
     }
     /**
@@ -89,7 +91,6 @@ class PenitipanController extends Controller
      */
     public function show($id)
     {
-        
     }
 
     /**
@@ -122,7 +123,8 @@ class PenitipanController extends Controller
             'layanan' => 'required',
             'antar_jemput' => 'required',
             'id_kucing' => 'required',
-            'id_user' => 'required'
+            'id_user' => 'required',
+            'status' => 'required'
         ]);
 
         Penitipan::whereId($id)->update([
@@ -132,10 +134,11 @@ class PenitipanController extends Controller
             'layanan' => Str::title($request->layanan),
             'antar_jemput' => Str::title($request->antar_jemput),
             'id_kucing' => $request->id_kucing,
-            'id_user' => $request->id_user
+            'id_user' => $request->id_user,
+            'status' => Str::title($request->status)
         ]);
 
-        
+
 
         $request->session()->flash('sukses', '
             <div class="alert alert-success" role="alert">
@@ -143,7 +146,25 @@ class PenitipanController extends Controller
             </div>
         ');
         return redirect('/penitipan');
-    
+    }
+
+    /**
+     * Buat Approval penitipan
+     */
+
+    public function approve(Request $request, $id)
+    {
+        $penitipan = Penitipan::find($id);
+
+        $penitipan->status = 'Approved';
+        $penitipan->save();
+
+        $request->session()->flash('sukses', '
+              <div class="alert alert-success" role="alert">
+                  Data berhasil diapprove
+              </div>
+          ');
+        return redirect('/penitipan');
     }
 
     /**

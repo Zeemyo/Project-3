@@ -15,11 +15,12 @@ class CreateTransaksiTable extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
-            $table->string('biaya_titip', 50);
-            $table->string('biaya_tambahan', 50);
-            $table->string('biaya_antar_jemput', 50);
+            $table->foreign('id_penitipan')->references('id')->on('penitipan')->onDelete('cascade');
+            $table->unsignedBigInteger('id_penitipan');
+            $table->string('midtrans_transaction_id');
+            $table->string('midtrans_order_id');
+            $table->unsignedBigInteger('midtrans_va_number');
             $table->string('total', 50);
-            $table->string('status', 50);
             $table->timestamps();
         });
     }

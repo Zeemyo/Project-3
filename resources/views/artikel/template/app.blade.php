@@ -10,12 +10,14 @@
     <div class="container">
         @include('artikel/template/about')
     </div>
-
+    <div class="container">
+        @include('artikel/template/artikel-carousell')
+    </div>
     <div class="container">
         @include('artikel/template/services')
     </div>
     <div class="container">
-        @include('artikel/template/artikel-carousell')
+        @include('artikel/template/konsultasi-page')
     </div>
 
     <!-- <div class="container">

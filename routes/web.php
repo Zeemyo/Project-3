@@ -31,7 +31,7 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::group(['middleware' => ['auth','ceklevel:admin,user']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function () {
 
     Route::get('/transaksi', function () {
         return view('/admin/transaksi');
@@ -39,15 +39,15 @@ Route::group(['middleware' => ['auth','ceklevel:admin,user']], function () {
     Route::get('/dashboard', function () {
         return view('/admin/dashboard');
     });
-    
+
     Route::get('/konsultasi', function () {
         return view('/admin/konsultasi');
     });
-    
+
     Route::get('/penitipan', function () {
         return view('/admin/penitipan');
     });
-    
+
     Route::get('/adopsi', function () {
         return view('/admin/adopsi');
     });
@@ -57,7 +57,6 @@ Route::group(['middleware' => ['auth','ceklevel:admin,user']], function () {
     Route::resource('/kategori', 'KategoriController');
 
     Route::resource('/kucing', 'KucingController');
-          
 
     Route::resource('/adopsi', 'AdopsiController');
 
@@ -65,14 +64,13 @@ Route::group(['middleware' => ['auth','ceklevel:admin,user']], function () {
 
     Route::resource('/penitipan', 'PenitipanController');
 
-
-
+    Route::put('penitipan/approve/{status}', [PenitipanController::class, 'approve']);
 });
 
+// Webhook
+Route::post('/webhook', [MidtransWebhookController::class, 'index']);
 
-    route::get('/home',[HomeController::class,'index'])->name('home');    
-    Route::get('/', [ArtikelController::class, 'index']);
-    Route::get('/{slug}', [ArtikelController::class, 'artikel']);
-    Route::get('/artikel-kategori/{slug}', [ArtikelController::class, 'kategori']);
- 
-    
+route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [ArtikelController::class, 'index']);
+Route::get('/{slug}', [ArtikelController::class, 'artikel']);
+Route::get('/artikel-kategori/{slug}', [ArtikelController::class, 'kategori']);

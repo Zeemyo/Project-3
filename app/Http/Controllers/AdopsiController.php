@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Adopsi;
-use App\Models\Users;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -42,7 +40,8 @@ class AdopsiController extends Controller
             'jenis_kucing' => 'required',
             'alasan_owner' => 'required',
             'medical_note' => 'required',
-            'deskripsi' => 'required'
+            'deskripsi' => 'required',
+            'kontak' => 'required'
         ]);
 
         $image = time() .'-' .$request->image->getClientOriginalName();
@@ -55,7 +54,8 @@ class AdopsiController extends Controller
             'jenis_kucing' => $request->jenis_kucing,
             'alasan_owner' => $request->alasan_owner,
             'medical_note' => $request->medical_note,
-            'deskripsi' => $request->deskripsi
+            'deskripsi' => $request->deskripsi,
+            'kontak' => $request->kontak,
         ]);
 
         $request->session()->flash('sukses', '
@@ -86,8 +86,7 @@ class AdopsiController extends Controller
      */
     public function edit($id)
     {
-        
-        $adopsi = Adopsi::select('id', 'image', 'nama_kucing', 'jenis_kucing', 'alasan_owner', 'medical_note', 'deskripsi')->whereId($id)->firstOrFail();
+        $adopsi = Adopsi::whereId($id)->firstOrFail();
         return view('admin/adopsi/edit', compact('adopsi'));
     }
 
@@ -106,20 +105,23 @@ class AdopsiController extends Controller
             'jenis_kucing' => 'required',
             'alasan_owner' => 'required',
             'medical_note' => 'required',
-            'deskripsi' => 'deskripsi',
+            'deskripsi' => 'required',
+            'kontak' => 'required'
         ]);
 
         $data = [
+            'image' => $request->image,
             'nama_kucing' => $request->nama_kucing,
             'jenis_kucing' => $request->jenis_kucing,
             'alasan_owner' => $request->alasan_owner,
             'medical_note' => $request->medical_note,
             'deskripsi' => $request->deskripsi,
+            'kontak' => $request->kontak
         ];
 
         $adopsi = Adopsi::select('image', 'id')->whereId($id)->first();
         if ($request->image) {
-            File::delete('upload/adopsi/' .$kucing->image);
+            File::delete('upload/adopsi/' .$adopsi->image);
 
             $image = time() . '-' . $request->image->getClientOriginalName();
             $request->image->move('upload/adopsi', $image);

@@ -10,7 +10,7 @@
         
             <label for="staticEmail" class="col-sm-2 col-form-label">Nama Kucing</label>
     <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$adopsi->nama_kucing}">
+      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$adopsi->nama_kucing}}">
     </div>
             <h2 class="card-title">{{$adopsi->nama_kucing}}</h2>
             <h2 class="card-title">{{$adopsi->ras}}</h2>

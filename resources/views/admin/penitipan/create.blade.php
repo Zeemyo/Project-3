@@ -6,13 +6,13 @@
     <h1 class="h3 mb-4 text-gray-800">Penitipan</h1>
 
     <form action="/penitipan" method="POST" enctype="multipart/form-data">
-    @csrf
+        @csrf
         <div class="form-group">
             <label for="id_user">Nama user</label>
             <select class="form-control" id="id_user" name="id_user">
                 <option selected disabled>Pilih User</option>
                 @foreach ($users as $row)
-                    <option value="{{$row->id}}">{{$row->name}}</option>
+                    <option value="{{ $row->id }}">{{ $row->name }}</option>
                 @endforeach
             </select>
             @error('name')
@@ -25,7 +25,7 @@
             <select class="form-control" id="id_kucing" name="id_kucing">
                 <option selected disabled>Pilih Kucing</option>
                 @foreach ($kucing as $row)
-                    <option value="{{$row->id}}">{{$row->nama_kucing}}</option>
+                    <option value="{{ $row->id }}">{{ $row->nama_kucing }}</option>
                 @endforeach
             </select>
             @error('nama_kucing')
@@ -53,24 +53,41 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
+        {{-- Radio Button --}}
         <div class="form-group">
-            <label for="layanan">Jenis Pelayanan</label>
-            <p>- Grooming</p>
-            <p>- Pelayanan Medis</p>
-            <p>- Akupuntur Kucing</p>
-            <input type="text" class="form-control" id="layanan" name="layanan">
+            <label for="layanan" class="form-label">Extra</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="layanan" id="Layanan_1" value="50000">
+                <label for="layanan" class="form-label">Grooming</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="layanan" id="Layanan_2" value="150000">
+                <label for="layanan" class="form-label">Pengobatan</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="layanan" id="Layanan_3" value="300000">
+                <label for="layanan" class="form-label">Extra Care</label>
+            </div>
+
+            {{-- <input type="text" class="form-control" id="layanan" name="layanan">
             @error('layanan')
                 <small class="text-danger">{{ $message }}</small>
-            @enderror
+            @enderror --}}
         </div>
-        
+
+        {{-- Radio Button --}}
         <div class="form-group">
-            <label for="antar_jemput">antar jemput</label>
-            <input type="text" class="form-control" id="antar_jemput" name="antar_jemput">                       
+            <a style="font-style: italic;">Khusus Area Bandung</a>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="antar_jemput" id="antar_jemput" value="35000">
+                <label for="antar_jemput" class="form-label">Antar Jemput</label>
+            </div>
+            {{-- <input type="text" class="form-control" id="antar_jemput" name="antar_jemput">
             @error('antar_jemput')
                 <small class="text-danger">{{ $message }}</small>
-            @enderror
+            @enderror --}}
         </div>
+
         <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
         <a href="/penitipan" class="btn btn-secondary btn-sm">Kembali</a>
     </form>

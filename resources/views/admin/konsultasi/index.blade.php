@@ -28,8 +28,8 @@
                 @foreach ($konsultasi as $row)
                     <tr>
                     <th scope="row">{{$loop->iteration}}</th>
-                    
-                    <td>{{$row->image}}</td>
+                    <td><img src="/upload/post/{{$row->image}}" alt="" width="80px" height="80px"></td>
+                    <!-- <td>{{$row->image}}</td> -->
                     <td>{{$row->nama_konsultan}}</td>
                     <td>{{$row->deskripsi}}</td>
                     <td>{{$row->kontak}}</td>

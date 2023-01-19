@@ -16,7 +16,7 @@
       <p>Melayani jasa Open FREE Adopsi. Kami adalah tempat kamu bisa mengadopsi Kucing Ras terpercaya bebas biaya. Kami menyediakan berbagai jenis kucing Ras</p>
     </div>
     <div class="col-sm-4">
-    <a href="/konsultasi" title="Image from freeiconspng.com"><img src="https://www.freeiconspng.com/uploads/medical-doctor-male-icon-png-26.png" width="90" alt="medical doctor male icon png" /></a>
+    <a href="/konsultasi-page" title="Image from freeiconspng.com"><img src="https://www.freeiconspng.com/uploads/medical-doctor-male-icon-png-26.png" width="90" alt="medical doctor male icon png" /></a>
       <!-- <span class="glyphicon glyphicon-lock logo-small"></span> -->
       <h4>KONSULTASI</h4>
       <p>Melayani jasa konsultasi yang di dukung oleh Tenaga medis profesional (Dokter Hewan Praktisi) dalam mendiagnosa penyakit. Dapat menjawab permasalahan kesehatan anabul kesayangan anda.</p>

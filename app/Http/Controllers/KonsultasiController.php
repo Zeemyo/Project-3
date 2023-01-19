@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Konsultasi;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class KonsultasiController extends Controller
 {
@@ -36,23 +37,26 @@ class KonsultasiController extends Controller
         $request->validate([
             'nama_konsultan' => 'required',
             'deskripsi' => 'required',
-            'image' => 'required',
+            'image' => 'required|mimes:jpg,jpeg,png',
             'kontak' => 'required'
         ]);
 
-        $konsultasi = new Konsultasi();
-        $konsultasi->nama_konsultan=Str::title($request->nama_konsultan);
-        $konsultasi->deskripsi=Str::title($request->deskripsi);
-        $konsultasi->image=Str::title($request->image);
-        $konsultasi->kontak=Str::title($request->kontak);
-        $konsultasi->save();
+        $image = time() .'-' .$request->image->getClientOriginalName();
+        $request->image->move('upload/post', $image);
 
-        // Konsultasi::create([
-        //     'nama_konsultan' => $request->nama_konsultan,
-        //     'deskripsi' => $request->deskripsi,
-        //     'image' => $request->image,
-        //     'kontak' => $request->kontak
-        // ]);
+        // $konsultasi = new Konsultasi();
+        // $konsultasi->nama_konsultan=Str::title($request->nama_konsultan);
+        // $konsultasi->deskripsi=Str::title($request->deskripsi);
+        // $konsultasi->image=Str::title($request->image);
+        // $konsultasi->kontak=Str::title($request->kontak);
+        // $konsultasi->save();
+
+        Konsultasi::create([
+            'image' => $image,
+            'nama_konsultan' => $request->nama_konsultan,
+            'deskripsi' => $request->deskripsi,
+            'kontak' => $request->kontak
+        ]);
 
         $request->session()->flash('sukses', '
             <div class="alert alert-success" role="alert">
